@@ -1,24 +1,21 @@
 # README
+ 
+For build 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+docker build -t demo .
 
-Things you may want to cover:
+For run
 
-* Ruby version
+docker run -it --rm --name back -p 3000:3000 -d demo rails s
 
-* System dependencies
+For logs 
 
-* Configuration
+docker logs -f back
 
-* Database creation
+For stop
 
-* Database initialization
+docker stop back
 
-* How to run the test suite
+For inspect 
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+docker inspect back
