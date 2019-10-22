@@ -6,19 +6,15 @@ respond_to :json
     render json:@user
   end
 
-  def login
+  def show
     @user = User.where('email = ? AND password = ?', params[:email], params[:password]).first
     if @user.present?
-        render json: {id: @user.id, info: 'Use your token to make api calls'}
+        render json: {user: @user, info: 'Use your token to make api calls'}
     else
         render json: {error: 'User not Found'}
     end
   end
-  
-  def show
-    @user = User.find(params[:id])
-    render json:@user
-  end
+  	
 
   def create
     
