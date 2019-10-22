@@ -25,4 +25,4 @@ For API
 get all users:
 	/user
 get user from id:
-	/user?user_id=match
+        /user/user?user_id=match

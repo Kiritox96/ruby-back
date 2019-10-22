@@ -8,7 +8,7 @@ class UserController < ApplicationController
   def show
     if params[:user_id].present?
 
-        @user = User.find_by(user_id: params[:user_id]).first
+        @user = User.find_by(user_id: params[:user_id])
 	if @user
 		render json: @user
     	else
