@@ -19,3 +19,10 @@ docker stop back
 For inspect 
 
 docker inspect back
+
+For API
+
+get all users:
+	/user
+login:
+	/login

@@ -2,25 +2,48 @@ class UserController < ApplicationController
 respond_to :json
 
   def index
-    respond_with User.all
+    @user =  User.all
+    render json:@user
   end
 
+  def login
+    @user = User.where('email = ? AND password = ?', params[:email], params[:password]).first
+    if @user.present?
+        render json: {id: @user.id, info: 'Use your token to make api calls'}
+    else
+        render json: {error: 'User not Found'}
+    end
+  end
+  
   def show
-    respond_with User.find(params[:id])
+    @user = User.find(params[:id])
+    render json:@user
   end
 
   def create
-    respond_with :api, User.create(user_params)
+    
+    @user = User.create(user_params)
+    render json:@user
+    if @user.save
+        render json: @user
+    else
+        render json: {error: 'process not completed'}
+    end
   end
 
   def destroy
-    respond_with User.destroy(params[:id])
+    @user = User.destroy(params[:id])
+    if @user.destroy
+        render json: {status: 'successful'}
+    else
+        render json: {error: 'process not completed'}
+    end
   end
 
   def update
     user = User.find(params['id'])
     user.update(user_params)
-    respond_with User, json: user
+    render json:user
   end
 
   private
