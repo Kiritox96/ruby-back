@@ -24,5 +24,5 @@ For API
 
 get all users:
 	/user
-login:
-	/login
+get user from id:
+	/user?user_id=match

@@ -1,43 +1,44 @@
 class UserController < ApplicationController
-respond_to :json
 
   def index
-    @user =  User.all
-    render json:@user
+    @users =  User.all
+    render json:@users
   end
 
   def show
-    @user = User.where('email = ? AND password = ?', params[:email], params[:password]).first
-    if @user.present?
-        render json: {user: @user, info: 'Use your token to make api calls'}
+    if params[:user_id].present?
+
+        @user = User.find_by(user_id: params[:user_id]).first
+	if @user
+		render json: @user
+    	else
+		render json: {error: 'User with this id not found'}
+	end
     else
-        render json: {error: 'User not Found'}
+        render json: {error: 'Param id not found'}
     end
-  end
-  	
+  end  	
 
   def create
-    
     @user = User.create(user_params)
-    render json:@user
     if @user.save
-        render json: @user
+        render json: {status: 200 }
     else
         render json: {error: 'process not completed'}
     end
   end
 
   def destroy
-    @user = User.destroy(params[:id])
+    @user = User.destroy(params[:user_id])
     if @user.destroy
-        render json: {status: 'successful'}
+        render json: {status: 200 }
     else
         render json: {error: 'process not completed'}
     end
   end
 
   def update
-    user = User.find(params['id'])
+    user = User.find(params[:user_id])
     user.update(user_params)
     render json:user
   end
@@ -45,13 +46,11 @@ respond_to :json
   private
 
   def user_params
-    params.require(:user).permit(
-      :id,
-      :creation_date,
+    params.permit(
+      :user_id,
       :username,
       :email,
-      :password,
-      :lists
+      :password
     )
   end
 end
