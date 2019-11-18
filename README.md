@@ -40,5 +40,7 @@ get anime ordina da max a 0 episodi:
 get all users:
 	/user
 
+create user:
+	curl -d "user_id=token&mail=si@l,com&pass=si&username=i" -XPOST /user
 get user from id:
         /user/user?user_id=match

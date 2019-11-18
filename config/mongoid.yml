@@ -1,8 +1,11 @@
 development:
   clients:
     default:
+      ssl: true
+      ssl_verify: false
       #database: db
       uri: mongodb+srv://user:user@anime-mlyde.mongodb.net/db
-      #options:
-      #  user: dai96
-      #  password: admin
+      options:
+        user: dai96
+        password: tammaro96
+        

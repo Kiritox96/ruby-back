@@ -18,14 +18,22 @@ class UserController < ApplicationController
         render json: {error: 'Param id not found'}
     end
   end  	
-
   def create
-    @user = User.create(user_params)
-    if @user.save
-        render json: {status: 200 }
+    @mail=request.request_parameters[:mail]
+    @pass=request.request_parameters[:pass]
+    @name=request.request_parameters[:username]
+    
+    @user_id=request.request_parameters[:user_id]
+    
+    if @mail.present? and @pass.present? and @name.present? and @user_id.present?
+       @user = User.new(:mail=>@mail,:password=>@pass,:username=>@user,:user_id=>@user_id)
+       @user.save
+      render json: {result:@user}
     else
-        render json: {error: 'process not completed'}
+      render json: {error:'invalid params'}
     end
+
+    
   end
 
   def destroy
@@ -38,9 +46,27 @@ class UserController < ApplicationController
   end
 
   def update
-    user = User.find(params[:user_id])
-    user.update(user_params)
-    render json:user
+    @mail = request.request_parameters[:mail]
+    @user_id = request.request_parameters[:user_id]
+    @password = request.request_parameters[:password]
+    @username = request.request_parameters[:username]
+    @all = User.all
+    @user = @all.select{ |el| el[:user_id] == @user_id}
+    
+    
+    if @mail.present?
+      @user[0][:mail] = @mail
+      User.update(@user)
+      render json: {result: @user}
+    elsif @username.present?
+      @user.update(:username=>@username)
+      render json: {result: @user}
+    elsif @password.present?
+      @user.update(:password=>@password)
+      render json: {result: @user}
+    else
+      render json:{error:'params invalid'}
+    end
   end
 
   private
