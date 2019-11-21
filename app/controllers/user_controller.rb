@@ -50,22 +50,29 @@ class UserController < ApplicationController
     @user_id = request.request_parameters[:user_id]
     @password = request.request_parameters[:password]
     @username = request.request_parameters[:username]
+    @preferiti = request.request_parameters[:preferiti]
     @all = User.all
     @user = @all.select{ |el| el[:user_id] == @user_id}
     
-    
-    if @mail.present?
-      @user[0][:mail] = @mail
-      User.update(@user)
-      render json: {result: @user}
-    elsif @username.present?
-      @user.update(:username=>@username)
-      render json: {result: @user}
-    elsif @password.present?
-      @user.update(:password=>@password)
-      render json: {result: @user}
+    if @user_id.present?
+      if @mail.present?
+        @user[0][:mail] = @mail
+        User.update(@user)
+        render json: {result: @user}
+      elsif @username.present?
+        @user.update(:username=>@username)
+        render json: {result: @user}
+      elsif @password.present?
+        @user.update(:password=>@password)
+        render json: {result: @user}
+      elsif @preferiti.present?
+        @user.update(:preferiti=>@preferiti)
+        render json: {result: @user}
+      else
+        render json:{error:'params invalid'}
+      end
     else
-      render json:{error:'params invalid'}
+      render json:{error:'user_id not found'}
     end
   end
 
