@@ -7,13 +7,30 @@ class AnimeController < ApplicationController
     end
 
     def show
-        if params[:order].present?
+        if params[:orders].present? and params[:genere].present? and params[:search].present?
+            @animes = Anime.all
+            src = @animes.select{|x| x[:name].include?(params[:search])}
+            generi = src.select{|v| v[:episodi].include?(params[:genere])}
             ordine = []
-            if params[:order] == 'ordina_piu_episodi'
-              @animes = Anime.all
+            if params[:order] == '1'
+              ordine = generi.sort_by{|s| s[:episodi].length}
+            elsif params[:order] == '2'
+              ordine = generi.sort_by{|s| s[:episodi].length}.reverse
+            elsif params[:order] == '3'
+
+            elsif params[:order] == '4'
+
+            else
+              render json:{error:'invalid params'}
+            end
+
+            render json:ordine
+        elsif params[:order].present?
+            ordine = []
+            @animes = Anime.all
+            if params[:order] == '1'
               ordine = @animes.sort_by{|x| x[:episodi].length}
-            elsif params[:order] == 'ordina_meno_episodi'
-              @animes = Anime.all
+            elsif params[:order] == '2'
               ordine = @animes.sort_by{|x| x[:episodi].length}.reverse
             end  
             
@@ -22,36 +39,36 @@ class AnimeController < ApplicationController
             else
               render json:{error:'order not found'}
             end
+        elsif params[:search].present?
+            @animes = Anime.all
+            src = @animes.select{|x| x[:name].include?(params[:search])}
+            if src
+              render json:src
+            else
+              render json:@animes
+            end
         elsif params[:type].present?
             
             if params[:type] == 'evidenza'
               list = ['one-piece-c','naruto-shippuden-c','detective-conan-a','boruto','naruto-c','fairy-tail-a','dragon-ball-z-c','hunter-x-hunter-2011-a','bleach-a','dragon-ball-super-a','black-clover','pokemon-a','gintama-a','inuyasha-a','fullmetal-alchemist-a']
-              result = []
-              @animes = Anime.all  
-              @animes.each do |v|
-                if list.include?(v['clean'])
-                  result << v
-                end
+              @animes = Anime.all
+              result = @animes.select{|x| list.include?(x['clean'])}
+              
+              if result
+                  render json:result
+              else
+                  render json:{error:'no list'}
               end
-                if result
-                    render json:result
-                else
-                    render json:{error:'no list'}
-                end
+
             elsif params[:type] == 'suggeriti'
               list = ['dr-stone','mahoutsukai-no-yome','bungou-stray-dogs','zatch-bell','ultimate-muscle','guilty-crown','capeta','quan-zhi-gao-shou','death-note-a','goblin-slayer','gto-great-teacher-onizuka','boku-dake-ga-inai-machi-erased-a','kiseijuu-sei-no-kakuritsu']
-                result = []
-                @animes = Anime.all
-                @animes.each do |v|
-                  if list.include?(v['clean'])
-                    result << v
-                  end
-                end 
-                if result
-                    render json:result
-                else
-                    render json:{error:'no list'}
-                end
+              @animes = Anime.all
+              result = @animes.select{|x| list.include?(x['clean'])}
+              if result
+                  render json:result
+              else
+                  render json:{error:'no list'}
+              end
             end
         elsif params[:genere].present?
             @animes = Anime.all

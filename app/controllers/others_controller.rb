@@ -53,7 +53,7 @@ class OthersController < ApplicationController
           @others = Others.all
           calendario = @others.find_by(type:'calendario')
           @animes = Anime.all
-          list = calendario[@giorno][0,3]
+          list = calendario[@giorno][0,4]
           v = list.map{|val| @animes.find_by(name:val)}
           render json:{giorno: v}
         end
