@@ -38,9 +38,9 @@ get anime ordina da max a 0 episodi:
 	/anime/anime?order=ordina_meno_episodi
 
 get anime from avanced search:
-	/anime/anime?genere=Tutti&search=Game&order=2
+	/anime/anime?genere=Tutti&src=Game&order=2
         genere can be Tutti or filter for a genre
-	search filter for name 
+	src filter for name 
 	order:
 		1 order for - episodes
 		2 order for + episodes

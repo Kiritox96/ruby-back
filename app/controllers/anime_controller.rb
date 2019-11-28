@@ -10,8 +10,8 @@ class AnimeController < ApplicationController
         if params[:genere].present?
             @animes = Anime.all
             src = []
-            if params[:search].present?
-              src = @animes.select{|x| x[:name].include?(params[:search])}
+            if params[:src].present?
+              src = @animes.select{|x| x[:name].include?(params[:src])}
             else
               src = @animes
             end
