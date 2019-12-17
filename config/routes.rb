@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :anime, only: [:index, :show]
   resources :others, only: [:show]
-  resources :user, only: [:index, :show, :create, :destroy, :update]
-  	
+  resources :users, only: [:index]  
+  post '/auth/login', to: 'authentication#login'
 end
+
+
