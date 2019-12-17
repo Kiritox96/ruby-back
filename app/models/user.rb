@@ -3,7 +3,6 @@ class User
   include Mongoid::Attributes::Dynamic  
   store_in collection:"user",database:"db",client:"default"
   
-  has_secure_password
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
   validates :password,

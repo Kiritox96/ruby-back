@@ -69,8 +69,8 @@ get all users:
 
 create user:
 
-	curl -d "user_id=token&mail=si@l,com&pass=si&username=i" -XPOST /user
+	curl -d "username=username&mail=si@l,com&password=passOn6el&password_confirmation=passOn6el&name=name" -XPOST /users
 
-get user from id:
+get user from username:
 
-        /user/user?user_id=match
+        /users/users?username=match
