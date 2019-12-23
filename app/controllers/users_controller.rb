@@ -11,7 +11,12 @@ class UsersController < ApplicationController
     
     # GET /users/{username}
     def show
-        render json: @user, status: :ok
+        if params[:username].present?
+          @user = User.find_by(username:params[:username])
+          render json: @user, status: :ok
+        else
+          render json: {error:'no param'}
+        end
     end
                                                
     
@@ -26,15 +31,16 @@ class UsersController < ApplicationController
         end
     end
     def update
-        unless 
-           @user.update(user_params)
-           render json: { errors: @user.errors.full_messages },
-           status: :unprocessable_entity
-        end
+        @user.update(user_params)
     end
     # DELETE /users/{username}
     def destroy
-        @user.destroy
+        @user = User.find_by(username:params[:username])
+        if @user.destroy
+          render json:{delete:'user deleted'}
+        else
+          render json:{error:'user not found'}
+        end
     end
                      
     
@@ -42,9 +48,12 @@ class UsersController < ApplicationController
                            
     
     def find_user
-        @user = User.find_by_username!(params[:_username])
-        if !user
+        @user = User.find_by(username:params[:username])
+        if !@user
           render json: { errors: 'User not found' }, status: :not_found
+        else
+          # cambiare parametri ogni volta che si aggiungo alcuni parametri 
+          render json: {email: @user[:email], username: @user[:username]}
         end
     end
                                                          

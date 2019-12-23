@@ -9,6 +9,8 @@ gem 'rails'
 gem 'puma', '~> 3.11'
 gem 'responders'
 gem 'mongoid'
+gem 'active_rest_client'
+
 # Reduces boot times through caching; required in config/boot.rb
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'

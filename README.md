@@ -20,6 +20,14 @@ For inspect
 
 docker inspect back
 
+For MangaEden API
+
+Used https://github.com/whichdigital/active-rest-client
+ 
+get all manga:
+
+        /manga
+
 For API
 
 get all animes:
