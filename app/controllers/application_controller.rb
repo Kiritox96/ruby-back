@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
         end
     end
 
-    before_action :authenticate_request
+    #before_action :authenticate_request
     attr_reader :current_user
     
     #include ExceptionHandler
