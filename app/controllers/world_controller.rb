@@ -30,8 +30,16 @@ class WorldController < ApplicationController
             else
               render json: 444
             end
+        elsif params[:evidenza].present?
+            evidenza = ['Black Clover','One Piece', 'Dragon Ball Heroes', 'Detective Conan', 'Boruto: Naruto Next Generations']
+            list = archivio.select{|anime| evidenza.include?(anime[:name])}
+            if list
+              render json: list
+            else
+              render json: 444
+            end
         else
-          render json:{"404": "param not found"}
+            render json:{"404": "param not found"}
         end
     end
 
