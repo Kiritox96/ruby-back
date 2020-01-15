@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
   def create
     @noty = Notification.new(notification_params)
     if @noty.save
-      User.all.each { |n|
+      Info.all.each { |n|
           n[:notification] = notification_params.as_json
           n.save!
       }
@@ -21,7 +21,7 @@ class NotificationsController < ApplicationController
 
   #POST /notifications
   def destroy 
-    @user = User.find_by(username: params[:username])
+    @user = Info.find_by(email: params[:email])
     if @user
       @user[:notification] = nil
       @user.save!
