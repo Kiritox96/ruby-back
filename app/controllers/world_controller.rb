@@ -30,6 +30,13 @@ class WorldController < ApplicationController
             else
               render json: 444
             end
+        elsif params[:genere].present?
+            list = archivio.select{|anime| anime[:generi].include?(params[:genere])}
+            if list
+              render json: list
+            else 
+              render json: 444
+            end
         elsif params[:type].present?
             if params[:type] == 'evidenza'
               evidenza = ['Black Clover','One Piece', 'Dragon Ball Heroes', 'Detective Conan', 'Boruto: Naruto Next Generations']
