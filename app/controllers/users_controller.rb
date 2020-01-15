@@ -4,9 +4,11 @@ class UsersController < ApplicationController
     # POST /register
      def register
        @user = User.create(user_params)
-       @info = Info.create({email:params[:email]})
         
-      if @user.save and @info.save
+      if @user.save 
+        @info = Info.create({email:params[:email]})
+
+        @info.save
        response = { message: 'User created successfully'}
        render json: response, status: 200 #ok
       else
