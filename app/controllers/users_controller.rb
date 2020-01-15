@@ -6,9 +6,9 @@ class UsersController < ApplicationController
        @user = User.create(user_params)
       if @user.save
        response = { message: 'User created successfully'}
-       render json: response, status: :created 
+       render json: response, status: 200 #ok
       else
-       render json: @user.errors, status: :bad
+       render json: @user.errors, status: 400 #bad
       end 
      end
 
@@ -33,10 +33,10 @@ class UsersController < ApplicationController
             message: 'Login Successful'
           }
         else
-          render json: { error: command.errors }, status: :unauthorized
+          render json: { error: command.errors }, status: 401 #non autorizzato
         end
        end
-       
+
      def user_params
        params.permit(
          :name,
