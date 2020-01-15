@@ -7,5 +7,5 @@ class User
   validates :email, uniqueness: true
 
   #encrypt password
-  has_secure_password                             
+  #has_secure_password                             
 end
