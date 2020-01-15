@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  resources :anime, only: [:index, :show]
-  resources :others, only: [:show]
-  resources :manga, only: [:index]
+  resources :world, only: [:index, :show]
+  resources :update, only: [:index]
+  resources :manga, only: [:index,:show]
   resources :notifications, only: [:index,:create]
   delete 'notifications' => 'notifications#destroy'
-  resources :users, only: [:index,:create,:show,:destroy]  
-  post '/auth/login', to: 'authentication#login'
+ # api_guard_routes for: 'users'
 end
 
 

@@ -1,12 +1,10 @@
-class User
+class User < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Attributes::Dynamic  
   store_in collection:"user",database:"db",client:"default"
-  
-  validates :email, presence: true, uniqueness: true
-  validates :username, presence: true, uniqueness: true
-  validates :password,
-    length: { minimum: 6 },
-    if: -> { new_record? || !password.nil? }
-                              
+  field :name, type: String
+  field :email, type: String
+  field :password_digest, String
+
+  has_secure_password                              
 end

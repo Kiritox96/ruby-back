@@ -22,7 +22,7 @@ RUN gem install bundler -v 1.17.2
 RUN gem install foreman -v 0.85.0
 RUN bundle install --jobs 20 --retry 5 
 # Adding project files
-COPY . .
+COPY . . 
 
 EXPOSE 3000
 ENTRYPOINT bundle exec rails s -b 0.0.0.0
