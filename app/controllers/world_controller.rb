@@ -39,7 +39,7 @@ class WorldController < ApplicationController
             end
         elsif params[:type].present?
             if params[:type] == 'evidenza'
-              evidenza = ['Black Clover','One Piece', 'Dragon Ball Heroes', 'Detective Conan', 'Boruto: Naruto Next Generations']
+              evidenza = ['One Piece', 'Black Clover', 'Dragon Ball Heroes', 'Detective Conan', 'Boruto: Naruto Next Generations']
               list = archivio.select{|anime| evidenza.include?(anime[:name])}
               if list
                 render json: list
@@ -47,7 +47,7 @@ class WorldController < ApplicationController
                 render json: 444
               end
             elsif params[:type] == 'suggeriti'
-              suggeriti = ['One Piece Movie 12: Z','Nanatsu no Taizai', 'Bungou Stray Dogs', 'The Ancient Magus Bride', 'Guilty Crown','Another','Quanzhi Gaoshou','Btooom!','Zetsuen no Tempest','God Eater','Angel Beats!','Bokura ga Ita','Si alza il vento','Another World','Piano no Mori (TV)']
+              suggeriti = ['One Piece Movie 12: Z','Nanatsu no Taizai', 'Bungou Stray Dogs', 'Fairy Tail', 'Guilty Crown','Dr. Stone','Quanzhi Gaoshou','Btooom!','Zetsuen no Tempest','Fullmetal Alchemist','Angel Beats!','Bokura ga Ita','Naruto','Pandora Hearts','Piano no Mori (TV)']
               list = archivio.select{|anime| suggeriti.include?(anime[:name])}
               if list
                 render json: list
