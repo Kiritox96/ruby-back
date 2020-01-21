@@ -12,6 +12,8 @@ gem 'mongoid'
 gem 'active_rest_client'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'simple_command'
+gem 'sentry-raven'
+
 # Reduces boot times through caching; required in config/boot.rb
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'
