@@ -58,6 +58,7 @@ class WorldController < ApplicationController
               render json: 444
             end
         else
+          Raven.capture_message('Test from development') 
             render json:{"404": "param not found"}
         end
     end
