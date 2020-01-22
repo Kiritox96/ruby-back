@@ -1,5 +1,5 @@
 class WorldController < ApplicationController
-    helper :all
+  helper_method :index
     
     def index
       expires_in 1.day, public: true
