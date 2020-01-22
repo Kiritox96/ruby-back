@@ -6,7 +6,6 @@ class WorldController < ApplicationController
     end
 
     def get_all
-      expire_in 2.day, :public => true
       World.all
     end
     def show
