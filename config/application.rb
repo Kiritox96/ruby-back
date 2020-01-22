@@ -37,9 +37,9 @@ module Back
     end
     #autoloads lib folder during production
     config.eager_load_paths << Rails.root.join('lib')
-    #Raven.configure do |config|
-    #  config.dsn = 'https://87bcb56b01074e28a3b6f3171edd6857:7c4b9f4223e74295b3ced848b25be9f3@sentry.io/1889617'
-    #end
+    Raven.configure do |config|
+      config.dsn = 'https://87bcb56b01074e28a3b6f3171edd6857:7c4b9f4223e74295b3ced848b25be9f3@sentry.io/1889617'
+    end
     config.filter_parameters << :password
 
     #autoloads lib folder during development

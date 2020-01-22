@@ -15,7 +15,7 @@ class WorldController < ApplicationController
             if list
               render json: list
             else
-              #Raven.capture_message('Problema con la ricerca per name') 
+              Raven.capture_message('Problema con la ricerca per name') 
 
               render json: 444
             end
@@ -24,7 +24,7 @@ class WorldController < ApplicationController
             if list
               render json: list
             else
-              #Raven.capture_message('Problema con il search') 
+              Raven.capture_message('Problema con il search') 
 
               render json: 444
             end
@@ -34,7 +34,7 @@ class WorldController < ApplicationController
             elsif params[:random] == "4"
               render json: @world.shuffle[0..3]
             else
-              #Raven.capture_message('Problema con i random') 
+              Raven.capture_message('Problema con i random') 
 
               render json: 444
             end
@@ -43,7 +43,7 @@ class WorldController < ApplicationController
             if list
               render json: list
             else 
-              #Raven.capture_message('Problema con la ricerca per genere') 
+              Raven.capture_message('Problema con la ricerca per genere') 
 
               render json: 444
             end
@@ -54,7 +54,7 @@ class WorldController < ApplicationController
               if list
                 render json: list
               else
-                #Raven.capture_message('Problema con evidenza') 
+                Raven.capture_message('Problema con evidenza') 
 
                 render json: 444
               end
@@ -64,7 +64,7 @@ class WorldController < ApplicationController
               if list
                 render json: list
               else
-                #Raven.capture_message('Problema con i suggeriti') 
+                Raven.capture_message('Problema con i suggeriti') 
 
                 render json: 444
               end
@@ -72,7 +72,7 @@ class WorldController < ApplicationController
               render json: 444
             end
         else
-          #Raven.capture_message('Parametri non trovati o invalidi') 
+          Raven.capture_message('Parametri non trovati o invalidi') 
           render json:{"404": "param not found"}
         end
     end
