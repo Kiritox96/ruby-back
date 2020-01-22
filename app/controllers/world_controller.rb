@@ -3,13 +3,13 @@ class WorldController < ApplicationController
     
     def index
       expires_in 1.day, public: true
-      render json: World.all
+      @all_world =  World.all
     end
 
     def show
 
         if params[:name].present?
-            list = index.find_by(name:params[:name])
+            list = @all_world.find_by(name:params[:name])
             if list
               render json: list
             else
@@ -18,7 +18,7 @@ class WorldController < ApplicationController
               render json: 444
             end
         elsif params[:search].present?
-            list = index.select{|anime| anime[:name].include?(params[:search])}
+            list = @all_world.select{|anime| anime[:name].include?(params[:search])}
             if list
               render json: list
             else
@@ -28,16 +28,16 @@ class WorldController < ApplicationController
             end
         elsif params[:random].present?
             if params[:random] == "1"
-              render json: index.sample
+              render json: @all_world.sample
             elsif params[:random] == "4"
-              render json: index.shuffle[0..3]
+              render json: @all_world.shuffle[0..3]
             else
               Raven.capture_message('Problema con i random') 
 
               render json: 444
             end
         elsif params[:genere].present?
-            list = index.select{|anime| anime[:generi].include?(params[:genere])}
+            list = @all_world.select{|anime| anime[:generi].include?(params[:genere])}
             if list
               render json: list
             else 
@@ -48,7 +48,7 @@ class WorldController < ApplicationController
         elsif params[:type].present?
             if params[:type] == 'evidenza'
               evidenza = ['One Piece', 'Black Clover', 'Dragon Ball Heroes', 'Detective Conan', 'Boruto: Naruto Next Generations']
-              list = index.select{|anime| evidenza.include?(anime[:name])}
+              list = @all_world.select{|anime| evidenza.include?(anime[:name])}
               if list
                 render json: list
               else
@@ -58,7 +58,7 @@ class WorldController < ApplicationController
               end
             elsif params[:type] == 'suggeriti'
               suggeriti = ['One Piece Movie 12: Z','Nanatsu no Taizai', 'Bungou Stray Dogs', 'Fairy Tail', 'Guilty Crown','Dr. Stone','Quanzhi Gaoshou','Btooom!','Zetsuen no Tempest','Fullmetal Alchemist','Angel Beats!','Bokura ga Ita','Naruto','Pandora Hearts','Piano no Mori (TV)']
-              list = index.select{|anime| suggeriti.include?(anime[:name])}
+              list = @all_world.select{|anime| suggeriti.include?(anime[:name])}
               if list
                 render json: list
               else
