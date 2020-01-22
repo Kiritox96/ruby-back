@@ -13,7 +13,6 @@ gem 'active_rest_client'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'simple_command'
 gem 'sentry-raven'
-
 # Reduces boot times through caching; required in config/boot.rb
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'
@@ -21,7 +20,7 @@ gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+#  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
