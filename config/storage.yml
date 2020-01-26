@@ -1,0 +1,4 @@
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+  host: "http:otaku-world.space:3000"

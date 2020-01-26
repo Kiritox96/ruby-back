@@ -50,7 +50,7 @@ class WorldController < ApplicationController
         elsif params[:type].present?
             if params[:type] == 'evidenza'
               evidenza = ['One Piece', 'Black Clover', 'Dragon Ball Heroes', 'Detective Conan', 'Boruto: Naruto Next Generations']
-              list = @world.select{|anime| evidenza.include?(anime[:name])}
+              list = World.in(name:evidenza)
               if list
                 render json: list
               else
@@ -60,7 +60,7 @@ class WorldController < ApplicationController
               end
             elsif params[:type] == 'suggeriti'
               suggeriti = ['One Piece Movie 12: Z','Nanatsu no Taizai', 'Bungou Stray Dogs', 'Fairy Tail', 'Guilty Crown','Dr. Stone','Quanzhi Gaoshou','Btooom!','Zetsuen no Tempest','Fullmetal Alchemist','Angel Beats!','Bokura ga Ita','Naruto','Pandora Hearts','Piano no Mori (TV)']
-              list = @world.select{|anime| suggeriti.include?(anime[:name])}
+              list = World.in(name:suggeriti)
               if list
                 render json: list
               else
