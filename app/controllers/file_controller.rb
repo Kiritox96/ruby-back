@@ -9,6 +9,6 @@ class FileController < ApplicationController
     end   
     private
     def document_params
-        params.permit(files: []) # permit the files parameter.
+      params.require(:post).permit(uploads: []) # permit the files parameter.
     end
  end
