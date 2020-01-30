@@ -2,7 +2,7 @@ class WorldController < ApplicationController
   
     
     def index
-      render json: World.all
+      render json: World.limit(400)
     end
 
     def get_all
@@ -20,7 +20,8 @@ class WorldController < ApplicationController
               render json: 444
             end
         elsif params[:search].present?
-            list = @world.select{|anime| anime[:name].include?(params[:search])}
+            list =  World.where(name: /#{params[:search]}/i)
+           # list = World.select{|anime| anime[:name].include?(params[:search])}
             if list
               render json: list
             else
@@ -30,9 +31,8 @@ class WorldController < ApplicationController
             end
         elsif params[:random].present?
             if params[:random] == "1"
-              render json: @world.sample
-            elsif params[:random] == "4"
-              render json: @world.shuffle[0..3]
+              render json: World.skip(rand(World.count)).first
+            
             else
               Raven.capture_message('Problema con i random') 
 
