@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authenticate_request, only: %i[login register]
+    #skip_before_action :authenticate_request, only: %i[login register]
 
     # POST /register
      def register
@@ -21,9 +21,29 @@ class UsersController < ApplicationController
       end
 
       def test
-        render json: {
-              message: 'You have passed authentication and authorization test'
-            }
+        if params[:email].present? 
+          if params[:type] == 'input'
+            @info = Info.find_by(email:params[:email])
+            @info['preferiti'] = params[:preferiti].split(',')
+            @info['attivita'] = params[:attivita]
+            if @info.save
+              response = { message: 'User_info updated'}
+              render json: response, status: 200
+            else
+              render json: {error:'problem with user info'}
+            end
+          elsif params[:type] == 'output'
+            @info = Info.fynd_by(email:params[:email])
+            if @info
+
+              render json: {data: @info}
+            else
+              render json: {error:'User info not found'}
+            end
+          else
+            render json: {error:'param type invalid'}
+          end
+        end
       end
    
      private

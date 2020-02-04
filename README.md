@@ -69,7 +69,8 @@ get anime from avanced search:
 		4 TODO order for 
 	
 	these params have to be in the url
-
+preferiti
+http://otaku-world.space:3000/test?email=cca@co.com&type=input&preferiti=ciao,si,evvai
 get all users:
 	
 	/user
