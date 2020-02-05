@@ -25,7 +25,9 @@ class UsersController < ApplicationController
           if params[:type] == 'input'
             @info = Info.find_by(email:params[:email])
             @info['preferiti'] = params[:preferiti].split(',')
-            @info['attivita'] = params[:attivita]
+            list = []
+            params[:attivita].split(',').map{|x| x.split('00xxnumxx00')}.each{|v| list.push({'anime':v[0],'episodio':v[1]})}
+            @info['attivita'] = list
             if @info.save
               response = { message: 'User_info updated'}
               render json: response, status: 200
@@ -35,7 +37,9 @@ class UsersController < ApplicationController
           elsif params[:type] == 'output'
             @info = Info.find_by(email:params[:email])
             if @info
-
+              list = []
+              @info['preferiti'].each{|x| list.push(World.find_by(name:x))}
+              @info['preferiti'] = list
               render json: {data: @info}
             else
               render json: {error:'User info not found'}
