@@ -33,7 +33,7 @@ class UsersController < ApplicationController
               render json: {error:'problem with user info'}
             end
           elsif params[:type] == 'output'
-            @info = Info.fynd_by(email:params[:email])
+            @info = Info.find_by(email:params[:email])
             if @info
 
               render json: {data: @info}
@@ -53,6 +53,7 @@ class UsersController < ApplicationController
     
         if command.success?
           render json: {
+            email: email,
             access_token: command.result,
             message: 'Login Successful'
           }
