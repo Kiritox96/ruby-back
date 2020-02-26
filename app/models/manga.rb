@@ -3,6 +3,5 @@ class Manga < ActiveRestClient::Base
 
 
 
-  get :find,  "/manga/:id"
-  get :all, "/list/1/"
+  get :get_manga, "/manga/:id"
 end

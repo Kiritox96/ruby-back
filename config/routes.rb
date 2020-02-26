@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :world, only: [:index, :show]
   resources :update, only: [:index]
-  resources :manga, only: [:index,:show]
+  resources :manga, only: [:show]
   resources :notifications, only: [:index,:create]
   #add our register route
   post 'auth/register', to: 'users#register'
