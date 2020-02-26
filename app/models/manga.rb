@@ -3,5 +3,4 @@ class Manga < ActiveRestClient::Base
 
   get :get_page, "/list/1/?p=:x"
 
-  get :get_manga, "/manga/:id"
 end
