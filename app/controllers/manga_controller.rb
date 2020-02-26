@@ -4,9 +4,9 @@ class MangaController < ApplicationController
 
     def show
       if params[:id].present?
-        @manga = Manga.find(:id =>params[:id])
+        @manga = Manga.find(:id =>params[:id]).to_json
         if @manga
-          render @manga
+          render json:{data: @manga}
         else
           render json:{error:'manga not found'}
         end
