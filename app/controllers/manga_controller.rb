@@ -4,7 +4,7 @@ class MangaController < ApplicationController
 
     def show
       if params[:id].present?
-        @manga = Manga.find(params[:id])
+        @manga = Manga.find(:id =>params[:id])
         if @manga
           render @manga
         else
