@@ -5,7 +5,7 @@ class MangaController < ApplicationController
 
     def show
       if params[:id].present?
-        response = HTTParty.get(Manga.base_url + '/manga/' + params[:id])
+        response = Net::HTTP.get_response(Manga.base_url, '/api/manga/' + params[:id])
         if response.body
           render json:response.body
         else
