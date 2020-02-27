@@ -5,9 +5,12 @@ class MangaController < ApplicationController
 
     def show
       if params[:id].present?
-        response = Net::HTTP.get_response(Manga.base_url, '/api/manga/' + params[:id])
-        if response
-          render response.body
+        source = Manga.base_url + '/api/manga/' + params[:id]
+        resp = Net::HTTP.get_response(URI.parse(source))
+        data = resp.body
+        result = JSON.parse(data)
+        if result
+          render result
         else
           render json:{error:'manga not found'}
         end
