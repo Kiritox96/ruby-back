@@ -7,7 +7,7 @@ class MangaController < ApplicationController
         @agent = Mechanize.new
         begin
           response = @agent.get(source)
-          render json: response
+          render json: response.body
           rescue Mechanize::ResponseCodeError 
           rescue Timeout::Error
           rescue Mechanize::RedirectLimitReachedError
