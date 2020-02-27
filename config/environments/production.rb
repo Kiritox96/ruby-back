@@ -67,7 +67,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Use a different logger for distributed setups.
-  config.api_server_url = "www.mangaeden.com"
+  config.api_server_url = "https://www.mangaeden.com"
   #
   # re 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')

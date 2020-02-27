@@ -35,7 +35,7 @@ Rails.application.configure do
   config.active_support.deprecation = :log
 
 
-  config.api_server_url = "www.mangaeden.com"
+  config.api_server_url = "https://www.mangaeden.com"
   #
   #
   # ses error for missing translations
