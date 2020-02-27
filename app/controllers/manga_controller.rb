@@ -1,9 +1,10 @@
 class MangaController < ApplicationController
 
     def show
+      base = 'https://www.mangaeden.com'
       if params[:id].present? 
         if params[:manga] == '1'
-          source = Manga.base_url + '/api/manga/' + params[:id]
+          source = base + '/api/manga/' + params[:id]
           @agent = Mechanize.new
           begin
             response = @agent.get(source)
@@ -14,18 +15,44 @@ class MangaController < ApplicationController
             rescue StandardError
           end
         elsif params[:all].present? 
-          source = Manga.base_url + '/api/list/' + params[:all]
-          @agent = Mechanize.new
-          begin
-            response = @agent.get(source)
-            render json: response.body
-            rescue Mechanize::ResponseCodeError 
-            rescue Timeout::Error
-            rescue Mechanize::RedirectLimitReachedError
-            rescue StandardError   
+          if params[:page].present?
+            if params[:count].present?
+              source = base + '/api/list/' + params[:all] + '&p=' + params[:page] + '&l=' + params[:count]
+              @agent = Mechanize.new
+              begin
+                response = @agent.get(source)
+                render json: response.body
+                rescue Mechanize::ResponseCodeError 
+                rescue Timeout::Error
+                rescue Mechanize::RedirectLimitReachedError
+                rescue StandardError   
+              end
+            else
+              source = base + '/api/list/' + params[:all] + '&p=' + params[:page]
+              @agent = Mechanize.new
+              begin
+                response = @agent.get(source)
+                render json: response.body
+                rescue Mechanize::ResponseCodeError 
+                rescue Timeout::Error
+                rescue Mechanize::RedirectLimitReachedError
+                rescue StandardError   
+              end
+            end
+          else
+            source = base + '/api/list/' + params[:all]
+            @agent = Mechanize.new
+            begin
+              response = @agent.get(source)
+              render json: response.body
+              rescue Mechanize::ResponseCodeError 
+              rescue Timeout::Error
+              rescue Mechanize::RedirectLimitReachedError
+              rescue StandardError   
+            end
           end
         elsif params[:capitolo] == '1'
-          source = Manga.base_url + '/api/chapter/' + params[:id]
+          source = base + '/api/chapter/' + params[:id]
           @agent = Mechanize.new
           begin
             response = @agent.get(source)
