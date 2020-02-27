@@ -1,12 +1,13 @@
+
 class MangaController < ApplicationController
 
 
 
     def show
       if params[:id].present?
-        @manga = Manga.find(:id =>params[:id]).to_json
+        @manga = HTTParty.get('www.mangaeden.com/api/manga/' + params[:id])
         if @manga
-          render json:{data: @manga}
+          render json:@manga
         else
           render json:{error:'manga not found'}
         end
