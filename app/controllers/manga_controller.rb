@@ -15,41 +15,15 @@ class MangaController < ApplicationController
             rescue StandardError
           end
         elsif params[:all].present? 
-          if params[:page].present?
-            if params[:count].present?
-              source = base + '/api/list/' + params[:all] + '&p=' + params[:page] + '&l=' + params[:count]
-              @agent = Mechanize.new
-              begin
-                response = @agent.get(source)
-                render json: response.body
-                rescue Mechanize::ResponseCodeError 
-                rescue Timeout::Error
-                rescue Mechanize::RedirectLimitReachedError
-                rescue StandardError   
-              end
-            else
-              source = base + '/api/list/' + params[:all] + '&p=' + params[:page]
-              @agent = Mechanize.new
-              begin
-                response = @agent.get(source)
-                render json: response.body
-                rescue Mechanize::ResponseCodeError 
-                rescue Timeout::Error
-                rescue Mechanize::RedirectLimitReachedError
-                rescue StandardError   
-              end
-            end
-          else
-            source = base + '/api/list/' + params[:all]
-            @agent = Mechanize.new
-            begin
-              response = @agent.get(source)
-              render json: response.body
-              rescue Mechanize::ResponseCodeError 
-              rescue Timeout::Error
-              rescue Mechanize::RedirectLimitReachedError
-              rescue StandardError   
-            end
+          source = base + '/api/list/' + params[:all]
+          @agent = Mechanize.new
+          begin
+            response = @agent.get(source)
+            render json: response.body
+            rescue Mechanize::ResponseCodeError 
+            rescue Timeout::Error
+            rescue Mechanize::RedirectLimitReachedError
+            rescue StandardError   
           end
         elsif params[:capitolo] == '1'
           source = base + '/api/chapter/' + params[:id]
