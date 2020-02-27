@@ -4,7 +4,7 @@ class MangaController < ApplicationController
     def show
       if params[:id].present?
         source = Manga.base_url + '/api/manga/' + params[:id]
-        agent = Mechanize.new
+        @agent = Mechanize.new
         begin
           response = @agent.get(source)
           render json: response
