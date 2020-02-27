@@ -2,7 +2,7 @@
 class MangaController < ApplicationController
 
     def show
-      if params[:id]-present? 
+      if params[:id].present? 
         if params[:manga] == '1'
           source = Manga.base_url + '/api/manga/' + params[:id]
           @agent = Mechanize.new
