@@ -21,6 +21,8 @@ COPY Gemfile Gemfile
 RUN gem install bundler -v 1.17.2
 RUN gem install foreman -v 0.85.0
 RUN bundle install --jobs 20 --retry 5 
+
+RUN rails generate rspec:install
 # Adding project files
 COPY . . 
 
