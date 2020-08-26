@@ -26,7 +26,7 @@ RUN bundle install --jobs 20 --retry 5
 COPY . . 
 
 EXPOSE 3000
-CMD ["cucumber", "--require", "features", "--format", "pretty", "--format", "html", "--out", "output/report.html"]
-ENTRYPOINT bundle exec rails s -b 0.0.0.0
+run cucumber --require features --format pretty --format html --out output/report.html
+ENTRYPOINT bundle exec rails s -b 0.0.0.0 
 
 
