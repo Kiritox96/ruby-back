@@ -13,7 +13,7 @@ gem 'mechanize'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'simple_command'
 gem 'json'
-gem 'rspec'
+gem 'cucumber'  
 gem 'sentry-raven'
 # Reduces boot times through caching; required in config/boot.rb
 # Use Json Web Token (JWT) for token based authentication
@@ -26,7 +26,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'rspec-rails', ">= 3.9.0"
   gem 'listen', '>= 3.0.5', '< 3.2'
  
 end
