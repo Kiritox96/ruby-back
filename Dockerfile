@@ -26,7 +26,7 @@ RUN bundle install --jobs 20 --retry 5
 COPY . . 
 
 EXPOSE 3000
-run cucumber --require features --format pretty --format html --out report.html
+RUN cucumber --init
 ENTRYPOINT bundle exec rails s -b 0.0.0.0 
 
 
