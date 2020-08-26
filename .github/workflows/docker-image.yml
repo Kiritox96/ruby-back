@@ -13,11 +13,11 @@ jobs:
     runs-on: ruby:2.4.2
 
     steps:
-      - name: Pull docker images
-      - run: docker build -t back  . 
-        
-      - name: Run docker images
-      - run: docker run --rm --name back -p 3000:3000 -d back
+    - name: Pull docker images
+      run: docker build -t back  . 
+      
+    - name: Run docker images
+      run: docker run --rm --name back -p 3000:3000 -d back
 
-      - name: Exec cucumber
-      - run: docker exec -it back rake cucumber:all
+    - name: Exec cucumber
+      run: docker exec -it back rake cucumber:all
